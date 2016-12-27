@@ -46,16 +46,16 @@ class Citizen(object):
         self.__Energy = self.__Energy - minutes 
 
     def physical(self):
-        return math.sin((((2.0 * math.pi) * (self.__Age / 525600.0)) / 23.0)) * 100
+        return math.sin((((2.0 * math.pi) * (self.__Age / 525600.0)) / 23.0))
 
     def emotional(self):
-        return math.sin((((2.0 * math.pi) * (self.__Age / 525600.0)) / 28.0)) * 100
+        return math.sin((((2.0 * math.pi) * (self.__Age / 525600.0)) / 28.0))
 
     def intellectual(self):
-        return math.sin((((2.0 * math.pi) * (self.__Age / 525600.0)) / 33.0)) * 100
+        return math.sin((((2.0 * math.pi) * (self.__Age / 525600.0)) / 33.0))
 
     def print_status(self):
-        print("{0}Name: {1}{3}\t{0}P:{1}{4} {0}E:{1}{5} {0}I:{1}{6}\t{0}Age: {1}{7}\t {0}Energy: {1}{8}{2}".format(
+        print("{1}{3}\t{0}P: {1}{4:.2%}\t{0}E: {1}{5:.2%}\t{0}I: {1}{6:.2%}\t{0}Age: {1}{7}\t {0}Energy: {1}{8}{2}".format(
             Termcolor.colors.HEADER,
             Termcolor.colors.OKGREEN,
             Termcolor.colors.ENDC,
