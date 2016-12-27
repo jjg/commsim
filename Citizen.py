@@ -15,7 +15,7 @@ class Citizen(object):
 
     # destructor
     def __del__(self):
-        #TODO: tear-down the citizen
+        # TODO: tear-down the citizen
         pass
 
     # public methods
@@ -36,12 +36,15 @@ class Citizen(object):
     def work(self, job):
         self.__Age = self.__Age + job.Duration
         self.__Energy = self.__Energy - job.Energy
-        #TODO: increse skill levels based on skills associated with job
+        # TODO: increse skill levels based on skills associated with job
         # (inc. skill +1 each time a skill is used)
+
+        # emit the products of the work
+        return job.Products
 
     def age(self, minutes):
         # update the citizen's internal state to reflect specified minutes of aging
-        #TODO: other faactors will eventually impact change rates, for now just simple inc/dec 
+        # TODO: other faactors will eventually impact change rates, for now just simple inc/dec 
         self.__Age = self.__Age + minutes
         self.__Energy = self.__Energy - minutes 
 

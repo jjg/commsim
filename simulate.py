@@ -17,13 +17,21 @@ for x in range(0,random.randint(10,100)):   # 10-100 apples
 jobs = []
 
 for x in range(0,random.randint(10,100)):   # 10-100 jobs
+
     name = "Job-{}".format(x)
     duration = 8 * 60                       # 8 hours
     energy = 8 * 60                         # 8 hours worth of energy
     skills = []                             # not implemented
     tools = []                              # not implemented
     materials = []                          # not implemented
-    products = []                           # not implemented
+    products = []
+
+    # these jobs emit apples of random energy value 
+    product_name = "Product-Apple-{}".format(x)
+    product_energy = random.randint(1,6) * 60       # 1-6 hours
+    product_duration = 5 * (24 * 60)                # 5 days
+
+    products.append(Food.Food(product_name, product_energy, product_duration))
 
     jobs.append(Job.Job(name, duration, energy, skills, tools, materials, products))
 
@@ -60,7 +68,9 @@ while len(citizens) > 0:
 
             # eat
             if len(foods) > 0:
-                citizen.eat(foods.pop())
+                selected_food = foods.pop()
+                print("{} consumed {}".format(citizen.get_name(), selected_food.Name))
+                citizen.eat(selected_food)
             else:
                 if not last_food_day:
                     last_food_day = dayidx
@@ -68,9 +78,14 @@ while len(citizens) > 0:
 
             # work
             if len(jobs) > 0:
-                citizen.work(jobs.pop())    # 8 hours of work
+		# do the job and add the product to the food bin
+                product = citizen.work(jobs.pop())	# 8 hours of work
+                if len(product) > 0:
+                    print("{} added product {} to foods.".format(citizen.get_name(), product[0].Name))
+                    # TODO: loop throuh and add all food products 
+                    foods.append(product[0])
             else:
-                citizen.age(60 * 8)         # 8 hours of idleness
+                citizen.age(60 * 8)         		# 8 hours of idleness
                 if not last_job_day:
                     last_job_day = dayidx
                     print("Out of jobs!")
