@@ -7,10 +7,9 @@ import Termcolor
 class Citizen(object):
 
     # constructor
-    def __init__(self, name, birthdate, energy):
+    def __init__(self, name, age, energy):
         self.__Name = name
-        self.__Birthdate = datetime.strptime(string.replace(birthdate, "/", " "),"%m %d %Y")
-        self.__Age = 0
+        self.__Age = age 
         self.__Energy = energy
         self.Skills = [] 
 
@@ -64,5 +63,5 @@ class Citizen(object):
             self.physical(),
             self.emotional(),
             self.intellectual(), 
-            self.__Age, 
+            (((self.__Age / 60) / 24) / 365), 
             self.__Energy))
