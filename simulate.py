@@ -1,12 +1,41 @@
+import sys
 import random
 import Food
 import Job
 import Citizen
 
+# parse command line args
+num_citizens = sys.argv[1]
+num_foods = sys.argv[2]
+num_jobs = sys.argv[3]
+
+# gather missing input interactively
+# TODO: review to see if this logic could be cleaner
+if not num_citizens:
+    num_citizens = raw_input("Number of citizens: ")
+if num_citizens:
+    num_citizens = int(num_citizens)
+else:
+    num_citizens =  random.randint(10,100)
+
+if not num_foods:
+    num_foods = raw_input("Number of foods: ")
+if num_foods:
+    num_foods = int(num_foods)
+else:
+    num_foods = random.randint(10,100)
+
+if not num_jobs:
+    num_jobs = raw_input("Number of jobs: ")
+if num_jobs:
+    num_jobs = int(num_jobs)
+else:
+    num_jobs = random.randint(10,100)
+
+
 # create some food 
 foods = []
-
-for x in range(0,random.randint(10,100)):   # 10-100 apples 
+for x in range(0,num_foods):
     name = "Apple-{}".format(x)
     energy = random.randint(1,6) * 60       # 1-6 hours
     duration = 5 * (24 * 60)                # 5 days
@@ -15,9 +44,7 @@ for x in range(0,random.randint(10,100)):   # 10-100 apples
 
 # create some work
 jobs = []
-
-for x in range(0,random.randint(10,100)):   # 10-100 jobs
-
+for x in range(0,num_jobs):
     name = "Job-{}".format(x)
     duration = 8 * 60                       # 8 hours
     energy = 8 * 60                         # 8 hours worth of energy
@@ -37,8 +64,7 @@ for x in range(0,random.randint(10,100)):   # 10-100 jobs
 
 # create some citizens
 citizens = [] 
-
-for x in range(0,random.randint(1,10)):             # 1-10 citizens
+for x in range(0,num_citizens):
     name = "Charlie-{}".format(x)
     age = random.randint(18,75) * (365 * (24 * 60)) # 18-75 years old
     energy = random.randint(3,5) * (24 * 60)        # 3-5 days worth of energy 
@@ -50,7 +76,7 @@ print("{} Citizens, {} Pieces of food, {} Jobs".format(len(citizens), len(foods)
 raw_input("Press any enter to begin.")
 
 # loop until they are all toast
-dayidx = 0
+dayidx = 1 
 last_food_day = None
 last_job_day = None
 graveyard = []
@@ -68,8 +94,11 @@ while len(citizens) > 0:
 
             # eat
             if len(foods) > 0:
+                # reset last food day
+                last_food_day = 0
+                
                 selected_food = foods.pop()
-                print("{} consumed {}".format(citizen.get_name(), selected_food.Name))
+                print("{} consumed {} (+{}E)".format(citizen.get_name(), selected_food.Name, selected_food.Energy))
                 citizen.eat(selected_food)
             else:
                 if not last_food_day:
@@ -78,10 +107,13 @@ while len(citizens) > 0:
 
             # work
             if len(jobs) > 0:
+                # reset last job day
+                last_job_day = 0
+
 		# do the job and add the product to the food bin
                 product = citizen.work(jobs.pop())	# 8 hours of work
                 if len(product) > 0:
-                    print("{} added product {} to foods.".format(citizen.get_name(), product[0].Name))
+                    print("{} produced {} (+{}E).".format(citizen.get_name(), product[0].Name, product[0].Energy))
                     # TODO: loop throuh and add all food products 
                     foods.append(product[0])
             else:
