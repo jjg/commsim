@@ -4,13 +4,22 @@ import Food
 import Job
 import Citizen
 
+# TODO: improve or remove command-line parsing and interactive simulation setup
+num_citizens = None
+num_foods = None
+num_jobs = None
+
 # parse command line args
-num_citizens = sys.argv[1]
-num_foods = sys.argv[2]
-num_jobs = sys.argv[3]
+if len(sys.argv) > 2:
+    num_citizens = sys.argv[1]
+
+if len(sys.argv) > 3:
+    num_foods = sys.argv[2]
+
+if len(sys.argv) > 4:
+    num_jobs = sys.argv[3]
 
 # gather missing input interactively
-# TODO: review to see if this logic could be cleaner
 if not num_citizens:
     num_citizens = raw_input("Number of citizens: ")
 if num_citizens:
