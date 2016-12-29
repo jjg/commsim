@@ -1,6 +1,6 @@
 class Job(object):
 
-    def __init__(self, name, duration, energy, skills, materials, tools, products):
+    def __init__(self, name, duration, energy, p, e, i, skills, materials, tools, products):
         self.Name = name
         self.Duration = duration
         self.Energy = energy
@@ -9,4 +9,7 @@ class Job(object):
         self.Materials = materials
         self.Products = products
 
-        # TODO: include biorhythm properties 
+        # biorhythm properties
+        self.Physical = p
+        self.Emotional = e
+        self.Intellectual = i

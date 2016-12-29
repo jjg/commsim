@@ -10,7 +10,7 @@ class Citizen(object):
     def __init__(self, name, age, energy):
         self.__Name = name
         self.__Age = age 
-        self.__Energy = energy
+        self.__Energy = float(energy)
         self.Skills = [] 
 
     # destructor
@@ -35,11 +35,16 @@ class Citizen(object):
 
     def work(self, job):
         self.__Age = self.__Age + job.Duration
-        self.__Energy = self.__Energy - job.Energy
+
+        # reduce citizen energy based on their current condition
+        # TODO: further modify this based on skill level
+        self.__Energy = self.__Energy - \
+            (job.Energy * (-self.physical() * job.Physical)) - \
+            (job.Energy * (-self.emotional() * job.Emotional)) - \
+            (job.Energy * (-self.intellectual() * job.Intellectual))
+
         # TODO: increse skill levels based on skills associated with job
         # (inc. skill +1 each time a skill is used)
-
-        # TODO: Allow biorhythm (physical/emotional/intellectual) to impact work
 
         # emit the products of the work
         return job.Products
@@ -60,7 +65,7 @@ class Citizen(object):
         return math.sin((((2.0 * math.pi) * (self.__Age / 525600.0)) / 33.0))
 
     def print_status(self):
-        print("{1}{3}\t{0}P: {1}{4:.2%}\t{0}E: {1}{5:.2%}\t{0}I: {1}{6:.2%}\t{0}Age: {1}{7}\t {0}Energy: {1}{8}{2}".format(
+        print("{1}{3}\t{0}P: {1}{4:.2%}\t{0}E: {1}{5:.2%}\t{0}I: {1}{6:.2%}\t{0}Age: {1}{7}\t {0}Energy: {1}{8:n}{2}".format(
             Termcolor.colors.HEADER,
             Termcolor.colors.OKGREEN,
             Termcolor.colors.ENDC,

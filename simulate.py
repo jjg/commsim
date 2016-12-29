@@ -48,6 +48,9 @@ for x in range(0,num_jobs):
     name = "Job-{}".format(x)
     duration = 8 * 60                       # 8 hours
     energy = 8 * 60                         # 8 hours worth of energy
+    p = 1                                   # this is a physical job
+    e = 0
+    i = 0
     skills = []                             # not implemented
     tools = []                              # not implemented
     materials = []                          # not implemented
@@ -60,7 +63,7 @@ for x in range(0,num_jobs):
 
     products.append(Food.Food(product_name, product_energy, product_duration))
 
-    jobs.append(Job.Job(name, duration, energy, skills, tools, materials, products))
+    jobs.append(Job.Job(name, duration, energy, p, e, i, skills, tools, materials, products))
 
 # create some citizens
 citizens = [] 
