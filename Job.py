@@ -8,3 +8,5 @@ class Job(object):
         self.Tools = tools
         self.Materials = materials
         self.Products = products
+
+        # TODO: include biorhythm properties 

@@ -39,6 +39,8 @@ class Citizen(object):
         # TODO: increse skill levels based on skills associated with job
         # (inc. skill +1 each time a skill is used)
 
+        # TODO: Allow biorhythm (physical/emotional/intellectual) to impact work
+
         # emit the products of the work
         return job.Products
 
