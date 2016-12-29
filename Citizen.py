@@ -25,6 +25,9 @@ class Citizen(object):
     def get_energy(self):
         return self.__Energy
 
+    def get_age(self):
+        return self.__Age
+
     def eat(self, food):
         self.__Age = self.__Age + 1
         self.__Energy = self.__Energy + food.Energy

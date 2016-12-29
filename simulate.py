@@ -133,13 +133,13 @@ while len(citizens) > 0:
 
         else:
             print("{} is dead.".format(citizen.get_name()))
-            graveyard.append({"name": citizen.get_name(), "last_day": dayidx});
+            graveyard.append({"name": citizen.get_name(), "age": citizen.get_age(), "last_day": dayidx});
             citizens.pop(index)
 
     dayidx = dayidx + 1
 
-print("Community terminated after {} days (last day of food: {}, last day of work: {}).".format(dayidx, last_food_day, last_job_day))
+print("Community terminated after {} days ({} years). Last day of food: {}, last day of work: {}).".format(dayidx, (dayidx / 365), last_food_day, last_job_day))
 
 print("Citizen Statistics:")
 for citizen in graveyard:
-    print("{}: day {}".format(citizen["name"], citizen["last_day"]))
+    print("{}: age: {} last day: {}".format(citizen["name"], (((citizen["age"]/60)/24)/365), citizen["last_day"]))
